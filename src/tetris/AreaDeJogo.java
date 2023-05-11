@@ -28,9 +28,9 @@ public class AreaDeJogo extends JPanel {
         this.setBackground(placeholder.getBackground());
         this.setBorder(placeholder.getBorder());
         
-        coluna = Integer.valueOf(colunas.intValue());
-        tamanhoCelula = Integer.valueOf(this.getBounds().width) / colunas.intValue();
-        linhas = this.getBounds().height / tamanhoCelula.intValue();
+        this.coluna = Integer.valueOf(colunas.intValue());
+        this.tamanhoCelula = Integer.valueOf(this.getBounds().width) / colunas.intValue();
+        this.linhas = this.getBounds().height / tamanhoCelula.intValue();
         
         this.spawnaBloco();
         
@@ -38,24 +38,47 @@ public class AreaDeJogo extends JPanel {
     
     public void spawnaBloco () {
         
-        bloco = new BlocoTetris(new int[][]{{1,0}, {1,0}, {1,1}}, this.corAleatoria ());
+        this.bloco = new BlocoTetris(new int[][]{{1,0}, {1,0}, {1,1}}, this.corAleatoria ());
+        bloco.spawnaBloco(this.coluna);
+        
+    }
+    
+    public void blocoQueda () {
+        
+        if (!this.checaFundo()) return;
+        
+        this.bloco.moveParaBaixo();
+        this.repaint();
+        
+    }
+    
+    private Boolean checaFundo () {
+        
+        if (bloco.getBordaDoFundo() == this.linhas) return Boolean.FALSE;
+        return Boolean.TRUE;
         
     }
     
     private void desenhaBloco (Graphics g) {
         
-        Color cor = this.corAleatoria();
+        int altura = this.bloco.getAltura();
+        int largura = this.bloco.getLargura();
+        int[][] formato = this.bloco.getFormato();
+        Color cor = this.bloco.getCor();
         
-        for (int i = 0; i < bloco.getAltura(); i++) {
+        for (int i = 0; i < altura; i++) {
             
-            for (int j = 0; j < bloco.getLargura(); j++) {
+            for (int j = 0; j < largura; j++) {
                 
-                if (bloco.getFormato()[i][j] == 1){ 
+                if (formato[i][j] == 1){ 
                     
-                    g.setColor(bloco.getCor());
-                    g.fillRect(j * tamanhoCelula.intValue(), i * tamanhoCelula.intValue(), tamanhoCelula.intValue(), tamanhoCelula.intValue());
+                    int x = (bloco.getX() + j) * this.tamanhoCelula;
+                    int y = (bloco.getY() + i) * this.tamanhoCelula;
+                    
+                    g.setColor(cor);
+                    g.fillRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
                     g.setColor(Color.BLACK);
-                    g.drawRect(j * tamanhoCelula.intValue(), i * tamanhoCelula.intValue(), tamanhoCelula.intValue(), tamanhoCelula.intValue());
+                    g.drawRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
                     
                 }
                 

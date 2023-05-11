@@ -11,6 +11,8 @@ import javax.swing.JFrame;
  * @author Davi Campolina
  */
 public class FormatoDoJogo extends JFrame {
+    
+    private AreaDeJogo ga;
 
     /**
      * Creates new form FormatoDoJogo
@@ -18,7 +20,15 @@ public class FormatoDoJogo extends JFrame {
     public FormatoDoJogo() {
         
         initComponents();
-        this.add(new AreaDeJogo(placeholderDeArea, 10));
+        this.ga = new AreaDeJogo(placeholderDeArea, 10);
+        this.add(ga);
+        this.comecarJogo();
+        
+    }
+    
+    public void comecarJogo () {
+        
+        new GameThread(this.ga).start();
         
     }
 
@@ -48,7 +58,7 @@ public class FormatoDoJogo extends JFrame {
         );
         placeholderDeAreaLayout.setVerticalGroup(
             placeholderDeAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -63,7 +73,7 @@ public class FormatoDoJogo extends JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(placeholderDeArea, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(placeholderDeArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
