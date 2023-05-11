@@ -14,7 +14,7 @@ public class AreaDeJogo extends JPanel {
     private Integer linhas;
     private Integer coluna;
     private Integer tamanhoCelula;
-    private int[][] bloco = {{1,0}, {1,0}, {1,1}}; 
+    private BlocoTetris bloco; 
 
     /**
      * Creates new form AreaDeJogo
@@ -32,19 +32,27 @@ public class AreaDeJogo extends JPanel {
         tamanhoCelula = Integer.valueOf(this.getBounds().width) / colunas.intValue();
         linhas = this.getBounds().height / tamanhoCelula.intValue();
         
+        this.spawnaBloco();
+        
+    }
+    
+    public void spawnaBloco () {
+        
+        bloco = new BlocoTetris(new int[][]{{1,0}, {1,0}, {1,1}}, this.corAleatoria ());
+        
     }
     
     private void desenhaBloco (Graphics g) {
         
         Color cor = this.corAleatoria();
         
-        for (int i = 0; i < bloco.length; i++) {
+        for (int i = 0; i < bloco.getAltura(); i++) {
             
-            for (int j = 0; j < bloco[0].length; j++) {
+            for (int j = 0; j < bloco.getLargura(); j++) {
                 
-                if (bloco[i][j] == 1){ 
+                if (bloco.getFormato()[i][j] == 1){ 
                     
-                    g.setColor(cor);
+                    g.setColor(bloco.getCor());
                     g.fillRect(j * tamanhoCelula.intValue(), i * tamanhoCelula.intValue(), tamanhoCelula.intValue(), tamanhoCelula.intValue());
                     g.setColor(Color.BLACK);
                     g.drawRect(j * tamanhoCelula.intValue(), i * tamanhoCelula.intValue(), tamanhoCelula.intValue(), tamanhoCelula.intValue());
