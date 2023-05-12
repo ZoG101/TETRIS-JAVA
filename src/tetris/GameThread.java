@@ -19,18 +19,22 @@ public class GameThread extends Thread {
         
         while (true) {
             
-            ga.blocoQueda();
-
-            try {
-
-                Thread.sleep(1000);
-
-            } catch (Exception e) {
-
-                System.err.println(e.getMessage());
-
-            }
+            ga.spawnaBloco();
             
+            while(ga.blocoQueda()) {
+                
+                try {
+
+                    Thread.sleep(1000);
+
+                } catch (Exception e) {
+
+                    System.err.println(e.getMessage());
+
+                }
+                
+            }
+
         }
         
     }

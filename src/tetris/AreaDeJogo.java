@@ -15,6 +15,7 @@ public class AreaDeJogo extends JPanel {
     private Integer coluna;
     private Integer tamanhoCelula;
     private BlocoTetris bloco; 
+    private Color[][] fundo;
 
     /**
      * Creates new form AreaDeJogo
@@ -32,7 +33,7 @@ public class AreaDeJogo extends JPanel {
         this.tamanhoCelula = Integer.valueOf(this.getBounds().width) / colunas.intValue();
         this.linhas = this.getBounds().height / tamanhoCelula.intValue();
         
-        this.spawnaBloco();
+        this.fundo = new Color[this.linhas][this.coluna];
         
     }
     
@@ -43,12 +44,14 @@ public class AreaDeJogo extends JPanel {
         
     }
     
-    public void blocoQueda () {
+    public Boolean blocoQueda () {
         
-        if (!this.checaFundo()) return;
+        if (!this.checaFundo()) return Boolean.FALSE;
         
         this.bloco.moveParaBaixo();
         this.repaint();
+        
+        return Boolean.TRUE;
         
     }
     
@@ -88,6 +91,34 @@ public class AreaDeJogo extends JPanel {
         
     }
     
+    private void desenhaFundo (Graphics g) {
+        
+        Color cor;
+        
+        for (int r = 0; r < this.linhas; r++) {
+            
+            for (int c = 0; c < this.coluna; c++) {
+                
+                cor = this.fundo[r][c];
+                
+                if (cor != null) {
+                    
+                    int x = c * this.tamanhoCelula;
+                    int y = r * this.tamanhoCelula;
+                    
+                    g.setColor(cor);
+                    g.fillRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
+                    g.setColor(Color.BLACK);
+                    g.drawRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     private Color corAleatoria () {
         
         Random aleatorio = new Random();
@@ -104,6 +135,7 @@ public class AreaDeJogo extends JPanel {
     protected void paintComponent (Graphics g) {
         
         super.paintComponent(g);
+        this.desenhaFundo(g);
         this.desenhaBloco(g);
         
     }
