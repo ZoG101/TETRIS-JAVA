@@ -46,7 +46,12 @@ public class AreaDeJogo extends JPanel {
     
     public Boolean blocoQueda () {
         
-        if (!this.checaFundo()) return Boolean.FALSE;
+        if (!this.checaFundo()) { 
+            
+            this.moveBlocoParaFundo();
+            return Boolean.FALSE;
+            
+        }
         
         this.bloco.moveParaBaixo();
         this.repaint();
@@ -59,6 +64,33 @@ public class AreaDeJogo extends JPanel {
         
         if (bloco.getBordaDoFundo() == this.linhas) return Boolean.FALSE;
         return Boolean.TRUE;
+        
+    }
+    
+    private void moveBlocoParaFundo () {
+        
+        int[][] forma = this.bloco.getFormato();
+        int a = this.bloco.getAltura();
+        int l = this.bloco.getLargura();
+        
+        int xPos = this.bloco.getX();
+        int yPos = this.bloco.getY();
+        
+        Color cor = this.bloco.getCor();
+        
+        for (int r = 0; r < a; r++) {
+            
+            for (int c = 0; c < l; c++) {
+                
+                if (forma[r][c] == 1) {
+                    
+                    this.fundo[r + yPos][c + xPos] = cor;
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -78,10 +110,7 @@ public class AreaDeJogo extends JPanel {
                     int x = (bloco.getX() + j) * this.tamanhoCelula;
                     int y = (bloco.getY() + i) * this.tamanhoCelula;
                     
-                    g.setColor(cor);
-                    g.fillRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
-                    g.setColor(Color.BLACK);
-                    g.drawRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
+                    this.desenhaBlocoCelula(g, cor, x, y);
                     
                 }
                 
@@ -106,16 +135,22 @@ public class AreaDeJogo extends JPanel {
                     int x = c * this.tamanhoCelula;
                     int y = r * this.tamanhoCelula;
                     
-                    g.setColor(cor);
-                    g.fillRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
-                    g.setColor(Color.BLACK);
-                    g.drawRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
+                    this.desenhaBlocoCelula(g, cor, x, y);
                     
                 }
                 
             }
             
         }
+        
+    }
+    
+    private void desenhaBlocoCelula (Graphics g, Color cor, int x, int y) {
+        
+        g.setColor(cor);
+        g.fillRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
         
     }
     
