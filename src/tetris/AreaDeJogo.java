@@ -99,6 +99,29 @@ public class AreaDeJogo extends JPanel {
     private Boolean checaFundo () {
         
         if (this.bloco.getBordaDoFundo() == this.linhas) return Boolean.FALSE;
+        
+        int[][] formato = this.bloco.getFormato();
+        int l = this.bloco.getLargura();
+        int a = this.bloco.getAltura();
+        
+        for (int col = 0; col < l; col++) {
+            
+            for (int linha = a - 1; linha >= 0; linha--) {
+                
+                if (formato[linha][col] != 0) {
+                    
+                    int x = col + this.bloco.getX();
+                    int y = linha + this.bloco.getY() + 1;
+                    if (y < 0) break;
+                    if (this.fundo[y][x] != null) return Boolean.FALSE;
+                    break;
+                    
+                }
+                
+            }
+            
+        }
+        
         return Boolean.TRUE;
         
     }
@@ -106,6 +129,29 @@ public class AreaDeJogo extends JPanel {
     private Boolean checaEsquerda () {
         
         if (this.bloco.getBordaEsquerda() == 0) return Boolean.FALSE;
+        
+        int[][] formato = this.bloco.getFormato();
+        int l = this.bloco.getLargura();
+        int a = this.bloco.getAltura();
+        
+        for (int linha = 0; linha < a; linha++) {
+            
+            for (int col = 0; col < l; col++) {
+                
+                if (formato[linha][col] != 0) {
+                    
+                    int x = col + this.bloco.getX() - 1;
+                    int y = linha + this.bloco.getY();
+                    if (y < 0) break;
+                    if (this.fundo[y][x] != null) return Boolean.FALSE;
+                    break;
+                    
+                }
+                
+            }
+            
+        }
+        
         return Boolean.TRUE;
  
     }
@@ -113,6 +159,29 @@ public class AreaDeJogo extends JPanel {
     private Boolean checaDireita () {
         
         if (this.bloco.getBordaDireita() == this.coluna) return Boolean.FALSE;
+        
+        int[][] formato = this.bloco.getFormato();
+        int l = this.bloco.getLargura();
+        int a = this.bloco.getAltura();
+        
+        for (int linha = 0; linha < a; linha++) {
+            
+            for (int col = l - 1; col >= 0; col--) {
+                
+                if (formato[linha][col] != 0) {
+                    
+                    int x = col + this.bloco.getX() + 1;
+                    int y = linha + this.bloco.getY();
+                    if (y < 0) break;
+                    if (this.fundo[y][x] != null) return Boolean.FALSE;
+                    break;
+                    
+                }
+                
+            }
+            
+        }
+        
         return Boolean.TRUE;
         
     }

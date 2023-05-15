@@ -8,7 +8,9 @@
 
 - [] O jogo deve ir progredindo a diculdade com o tempo;
 
-- [] Um bloco deve começar a cair quando o outro chegar ao chão;
+- [x] Um bloco deve começar a cair quando o outro chegar ao chão;
+
+- [x] O jogador deve ser capaz de mover os blocos e gira-los;
 
 - [] O jogo deve ter diferentes formatos e cores de blocos.
 
@@ -18,4 +20,8 @@
 
 - [] O deve ser perguntado as iniciais ou o nome do player quando este perder.
 
-- [] O jogo deve ser dinâmico e leve.
+- [] O jogo deve ser dinâmico e leve;
+
+- [x] A movimentação dos blocos não pode ser lagada;
+
+- [x] Blocos não podem atravessar uns aos outros e nem as paredes.
