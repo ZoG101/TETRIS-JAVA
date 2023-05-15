@@ -60,6 +60,38 @@ public class AreaDeJogo extends JPanel {
         
     }
     
+    public void moveBlocoEsquerda () {
+        
+        this.bloco.moveParaEsquerda();
+        this.repaint();
+        
+    }
+    
+    public void moveBlocoDireita () {
+        
+        this.bloco.moveParaDireita();
+        this.repaint();
+        
+    }
+    
+    public void rotacionaBloco () {
+        
+        this.bloco.rotacionaBloco();
+        this.repaint();
+        
+    }
+    
+    public void dropaBloco () {
+        
+        while (this.checaFundo()) {
+            
+            this.bloco.moveParaBaixo();
+            this.repaint();
+            
+        }
+        
+    }
+    
     private Boolean checaFundo () {
         
         if (bloco.getBordaDoFundo() == this.linhas) return Boolean.FALSE;
