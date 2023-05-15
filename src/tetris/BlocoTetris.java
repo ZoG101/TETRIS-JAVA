@@ -130,4 +130,16 @@ public class BlocoTetris {
         
     }
     
+    public int getBordaEsquerda () {
+        
+        return this.x;
+        
+    }
+    
+    public int getBordaDireita () {
+        
+        return this.x + this.getLargura();
+        
+    }
+    
 }

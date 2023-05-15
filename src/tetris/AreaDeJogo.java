@@ -62,16 +62,20 @@ public class AreaDeJogo extends JPanel {
     
     public void moveBlocoEsquerda () {
         
+        if (!this.checaEsquerda()) return;
+            
         this.bloco.moveParaEsquerda();
-        this.repaint();
+        this.repaint();   
         
     }
     
     public void moveBlocoDireita () {
         
+        if (!this.checaDireita()) return;
+            
         this.bloco.moveParaDireita();
-        this.repaint();
-        
+        this.repaint();   
+           
     }
     
     public void rotacionaBloco () {
@@ -94,7 +98,21 @@ public class AreaDeJogo extends JPanel {
     
     private Boolean checaFundo () {
         
-        if (bloco.getBordaDoFundo() == this.linhas) return Boolean.FALSE;
+        if (this.bloco.getBordaDoFundo() == this.linhas) return Boolean.FALSE;
+        return Boolean.TRUE;
+        
+    }
+    
+    private Boolean checaEsquerda () {
+        
+        if (this.bloco.getBordaEsquerda() == 0) return Boolean.FALSE;
+        return Boolean.TRUE;
+ 
+    }
+    
+    private Boolean checaDireita () {
+        
+        if (this.bloco.getBordaDireita() == this.coluna) return Boolean.FALSE;
         return Boolean.TRUE;
         
     }
