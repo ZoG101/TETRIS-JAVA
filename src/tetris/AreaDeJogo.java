@@ -47,9 +47,7 @@ public class AreaDeJogo extends JPanel {
     public Boolean blocoQueda () {
         
         if (!this.checaFundo()) { 
-            
-            this.moveBlocoParaFundo();
-            this.limpaLinha();
+           
             return Boolean.FALSE;
             
         }
@@ -63,6 +61,7 @@ public class AreaDeJogo extends JPanel {
     
     public void moveBlocoEsquerda () {
         
+        if (this.bloco == null) return;
         if (!this.checaEsquerda()) return;
             
         this.bloco.moveParaEsquerda();
@@ -72,6 +71,7 @@ public class AreaDeJogo extends JPanel {
     
     public void moveBlocoDireita () {
         
+        if (this.bloco == null) return;
         if (!this.checaDireita()) return;
             
         this.bloco.moveParaDireita();
@@ -81,6 +81,8 @@ public class AreaDeJogo extends JPanel {
     
     public void rotacionaBloco () {
         
+        if (this.bloco == null) return;
+        if (this.bloco == null) return;
         this.bloco.rotacionaBloco();
         this.repaint();
         
@@ -88,6 +90,7 @@ public class AreaDeJogo extends JPanel {
     
     public void dropaBloco () {
         
+        if (this.bloco == null) return;
         while (this.checaFundo()) {
             
             this.bloco.moveParaBaixo();
@@ -187,7 +190,7 @@ public class AreaDeJogo extends JPanel {
         
     }
     
-    public void limpaLinha () {
+    public void limpaLinhas () {
         
         Boolean linhaCompleta;
         
@@ -207,12 +210,12 @@ public class AreaDeJogo extends JPanel {
             }
             
             if (linhaCompleta.booleanValue()) {
+            
+                this.limpaLinha(l);
+                this.desceBloco(l);
+                this.limpaLinha(0);
                 
-                for (int i = 0; i < this.coluna; i++) {
-                    
-                    this.fundo[l][i] = null;
-                    
-                }
+                l++;
                 
                 this.repaint();
                 
@@ -222,7 +225,31 @@ public class AreaDeJogo extends JPanel {
         
     }
     
-    private void moveBlocoParaFundo () {
+    private void limpaLinha (Integer l) {
+        
+        for (int c = 0; c < this.coluna; c++) {
+                    
+            this.fundo[l][c] = null;
+                    
+        }
+        
+    }
+    
+    private void desceBloco (Integer linhas) {
+        
+        for (int l = linhas; l > 0; l--) {
+            
+            for (int c = 0; c < this.coluna; c++) {
+                
+                this.fundo[l][c] = this.fundo[l-1][c];
+                
+            }
+            
+        }
+        
+    }
+    
+    public void moveBlocoParaFundo () {
         
         int[][] forma = this.bloco.getFormato();
         int a = this.bloco.getAltura();
@@ -246,6 +273,18 @@ public class AreaDeJogo extends JPanel {
             }
             
         }
+        
+    }
+    
+    public Boolean foraDoLimite () {
+        
+        if (this.bloco.getY() < 0) {
+            
+            this.bloco = null;
+            return Boolean.TRUE;
+            
+        }
+        return Boolean.FALSE;
         
     }
     

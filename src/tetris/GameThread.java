@@ -34,6 +34,16 @@ public class GameThread extends Thread {
                 }
                 
             }
+            
+            if (ga.foraDoLimite()) {
+                
+                System.out.println("Fim de Jogo.");
+                break;
+                
+            }
+            
+            ga.moveBlocoParaFundo();
+            ga.limpaLinhas();
 
         }
         
