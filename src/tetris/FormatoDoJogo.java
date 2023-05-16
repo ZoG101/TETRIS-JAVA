@@ -90,7 +90,19 @@ public class FormatoDoJogo extends JFrame {
     
     public void comecarJogo () {
         
-        new GameThread(this.ga).start();
+        new GameThread(this.ga, this).start();
+        
+    }
+    
+    public void atualizaPontuacao (int pontuacao) {
+        
+        this.displayPontuacao.setText("Pontuação: " + pontuacao);
+        
+    }
+    
+    public void atualizaNivel (int nivel) {
+        
+        this.displayNivel.setText("Nível: " + nivel);
         
     }
 
@@ -104,8 +116,8 @@ public class FormatoDoJogo extends JFrame {
     private void initComponents() {
 
         placeholderDeArea = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        displayPontuacao = new javax.swing.JLabel();
+        displayNivel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -125,22 +137,24 @@ public class FormatoDoJogo extends JFrame {
             .addGap(0, 298, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Pontuação: 0");
+        displayPontuacao.setFont(new java.awt.Font("Monocraft", 0, 14)); // NOI18N
+        displayPontuacao.setText("Pontuação: 0");
 
-        jLabel2.setText("Nível: 0");
+        displayNivel.setFont(new java.awt.Font("Monocraft", 0, 14)); // NOI18N
+        displayNivel.setText("Nível: 1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(displayPontuacao, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                    .addComponent(displayNivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(placeholderDeArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,10 +162,10 @@ public class FormatoDoJogo extends JFrame {
                 .addComponent(placeholderDeArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addContainerGap()
+                .addComponent(displayNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(displayPontuacao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -202,8 +216,8 @@ public class FormatoDoJogo extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel displayNivel;
+    private javax.swing.JLabel displayPontuacao;
     private javax.swing.JPanel placeholderDeArea;
     // End of variables declaration//GEN-END:variables
 }

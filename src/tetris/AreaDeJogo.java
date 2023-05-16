@@ -82,7 +82,7 @@ public class AreaDeJogo extends JPanel {
     public void rotacionaBloco () {
         
         if (this.bloco == null) return;
-        if (this.bloco == null) return;
+        if (!this.checaDireita()) return;
         this.bloco.rotacionaBloco();
         this.repaint();
         
@@ -190,9 +190,11 @@ public class AreaDeJogo extends JPanel {
         
     }
     
-    public void limpaLinhas () {
+    public Integer limpaLinhas () {
         
         Boolean linhaCompleta;
+        int linhasLimpas = 0;
+        int multiplicador = 1;
         
         for (int l = this.linhas - 1; l >= 0; l--) {
             
@@ -207,10 +209,13 @@ public class AreaDeJogo extends JPanel {
                     
                 }
                 
+                if (c == this.coluna - 1) multiplicador += (c + 1) * 0.1;
+                
             }
             
             if (linhaCompleta.booleanValue()) {
             
+                linhasLimpas += this.coluna * multiplicador;
                 this.limpaLinha(l);
                 this.desceBloco(l);
                 this.limpaLinha(0);
@@ -222,6 +227,8 @@ public class AreaDeJogo extends JPanel {
             }
             
         }
+        
+        return linhasLimpas;
         
     }
     
@@ -249,8 +256,9 @@ public class AreaDeJogo extends JPanel {
         
     }
     
-    public void moveBlocoParaFundo () {
+    public int moveBlocoParaFundo () {
         
+        int blocoPosicionado = 0;
         int[][] forma = this.bloco.getFormato();
         int a = this.bloco.getAltura();
         int l = this.bloco.getLargura();
@@ -267,12 +275,14 @@ public class AreaDeJogo extends JPanel {
                 if (forma[r][c] == 1) {
                     
                     this.fundo[r + yPos][c + xPos] = cor;
-                    
+                    blocoPosicionado++;
                 }
                 
             }
             
         }
+        
+        return blocoPosicionado;
         
     }
     
