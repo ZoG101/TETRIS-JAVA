@@ -49,6 +49,7 @@ public class AreaDeJogo extends JPanel {
         if (!this.checaFundo()) { 
             
             this.moveBlocoParaFundo();
+            this.limpaLinha();
             return Boolean.FALSE;
             
         }
@@ -183,6 +184,41 @@ public class AreaDeJogo extends JPanel {
         }
         
         return Boolean.TRUE;
+        
+    }
+    
+    public void limpaLinha () {
+        
+        Boolean linhaCompleta;
+        
+        for (int l = this.linhas - 1; l >= 0; l--) {
+            
+            linhaCompleta = Boolean.TRUE;
+            
+            for (int c = 0; c < this.coluna; c++) {
+                
+                if (this.fundo[l][c] == null) {
+                    
+                    linhaCompleta = Boolean.FALSE;
+                    break;
+                    
+                }
+                
+            }
+            
+            if (linhaCompleta.booleanValue()) {
+                
+                for (int i = 0; i < this.coluna; i++) {
+                    
+                    this.fundo[l][i] = null;
+                    
+                }
+                
+                this.repaint();
+                
+            }
+            
+        }
         
     }
     
