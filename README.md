@@ -6,7 +6,7 @@
 
 - [] O jogo deve ter um menu inicial simples com um botão para iniciar, outro para ver o plecar de líderes e um para sair;
 
-- [] O jogo deve ir progredindo a diculdade com o tempo;
+- [x] O jogo deve ir progredindo a diculdade com o tempo;
 
 - [x] Um bloco deve começar a cair quando o outro chegar ao chão;
 
