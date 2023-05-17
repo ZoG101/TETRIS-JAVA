@@ -12,7 +12,6 @@ public class GameThread extends Thread {
     private Integer nivel;
     private Integer nivelPorPonto;
     private Integer pausa;
-    private Integer velocidadePorNivel;
     
     public GameThread (AreaDeJogo ga, FormatoDoJogo fj) {
         
@@ -63,7 +62,7 @@ public class GameThread extends Thread {
                 
                 this.nivel = nvl;
                 fj.atualizaNivel(this.nivel);
-                this.pausa -= this.velocidadePorNivel = Integer.valueOf((pausa.intValue()/100)*10);
+                this.pausa -= Integer.valueOf((pausa.intValue()/100)*10);
                 
             }
 

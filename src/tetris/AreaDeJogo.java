@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 import javax.swing.JPanel;
+import tetris.blocos.*;
 
 /**
  *
@@ -16,6 +17,7 @@ public class AreaDeJogo extends JPanel {
     private Integer tamanhoCelula;
     private BlocoTetris bloco; 
     private Color[][] fundo;
+    private BlocoTetris[] blocos;
 
     /**
      * Creates new form AreaDeJogo
@@ -35,11 +37,14 @@ public class AreaDeJogo extends JPanel {
         
         this.fundo = new Color[this.linhas][this.coluna];
         
+        this.blocos = new BlocoTetris[]{new FormatoI(), new FormatoJ(), new FormatoL(), new FormatoO(), new FormatoS(), new FormatoT(), new FormatoZ()};
+        
     }
     
     public void spawnaBloco () {
         
-        this.bloco = new BlocoTetris(new int[][]{{1,0}, {1,0}, {1,1}}, this.corAleatoria());
+        Random aleatorio = new Random();
+        this.bloco = this.blocos[aleatorio.nextInt(this.blocos.length)];
         bloco.spawnaBloco(this.coluna);
         
     }
@@ -82,8 +87,13 @@ public class AreaDeJogo extends JPanel {
     public void rotacionaBloco () {
         
         if (this.bloco == null) return;
-        if (!this.checaDireita()) return;
+        
         this.bloco.rotacionaBloco();
+        
+        if (this.bloco.getBordaEsquerda() < 0) this.bloco.setX(0);
+        if (this.bloco.getBordaDireita() >= this.coluna) this.bloco.setX(this.coluna - this.bloco.getLargura());
+        if (this.bloco.getBordaDoFundo() >= this.linhas) this.bloco.setY(this.linhas - this.bloco.getAltura());
+        
         this.repaint();
         
     }
@@ -355,18 +365,6 @@ public class AreaDeJogo extends JPanel {
         g.fillRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
         g.setColor(Color.BLACK);
         g.drawRect(x, y, tamanhoCelula.intValue(), tamanhoCelula.intValue());
-        
-    }
-    
-    private Color corAleatoria () {
-        
-        Random aleatorio = new Random();
-        String r = "" + Math.round((aleatorio.nextDouble() * (255 - 0 + 1) + 0));
-        String g = "" + Math.round((aleatorio.nextDouble() * (255 - 0 + 1) + 0));
-        String b = "" + Math.round((aleatorio.nextDouble() * (255 - 0 + 1) + 0));
-        
-        Color cor = new Color(Integer.valueOf(r), Integer.valueOf(g), Integer.valueOf(b));
-        return cor;
         
     }
     

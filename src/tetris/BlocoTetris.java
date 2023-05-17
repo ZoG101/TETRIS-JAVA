@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author Davi Campolina
  */
-public class BlocoTetris {
+public abstract class BlocoTetris {
     
     private int[][] formato;
     private Color cor;
@@ -15,10 +15,10 @@ public class BlocoTetris {
     private int[][][] formatos;
     private int rotacaoAtual;
     
-    public BlocoTetris (int[][] formato, Color cor) {
+    public BlocoTetris (int[][] formato) {
         
         this.formato = formato;
-        this.cor = cor;
+        this.cor = this.corAleatoria();
         
         this.iniciaFormatos();
         
@@ -48,6 +48,14 @@ public class BlocoTetris {
             this.formato = this.formatos[i];
             
         }
+        
+    }
+    
+    private Color corAleatoria () {
+        
+        Random aleatorio = new Random();
+        Color cor = new Color(aleatorio.nextInt(256), aleatorio.nextInt(256), aleatorio.nextInt(256));
+        return cor;
         
     }
     
@@ -95,6 +103,18 @@ public class BlocoTetris {
     public Integer getY () {
         
         return y;
+        
+    }
+
+    public void setX(Integer x) {
+        
+        this.x = x;
+        
+    }
+
+    public void setY(Integer y) {
+        
+        this.y = y;
         
     }
     
