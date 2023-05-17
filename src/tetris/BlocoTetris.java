@@ -52,13 +52,13 @@ public class BlocoTetris {
     }
     
     public void spawnaBloco (int gradeLargura) {
-        
-        this.rotacaoAtual = 3;
+        Random aleatorio = new Random();
+        this.rotacaoAtual = aleatorio.nextInt(this.formatos.length);
         this.formato = formatos[this.rotacaoAtual];
         
-        Random aleatorio = new Random();
-        this.x = Integer.valueOf(new String("" + Math.round((aleatorio.nextDouble() * ((gradeLargura - 3) - 0 + 1) + 0))));
-        this.y = -this.getAltura()-1;
+        //this.x = Integer.valueOf(new String("" + Math.round((aleatorio.nextDouble() * ((gradeLargura - 3) - 0 + 1) + 0))));
+        this.x = Integer.valueOf(aleatorio.nextInt(gradeLargura - this.getLargura()));
+        this.y = -this.getAltura();
         
     }
 

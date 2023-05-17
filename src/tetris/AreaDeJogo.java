@@ -39,7 +39,7 @@ public class AreaDeJogo extends JPanel {
     
     public void spawnaBloco () {
         
-        this.bloco = new BlocoTetris(new int[][]{{1,0}, {1,0}, {1,1}}, this.corAleatoria ());
+        this.bloco = new BlocoTetris(new int[][]{{1,0}, {1,0}, {1,1}}, this.corAleatoria());
         bloco.spawnaBloco(this.coluna);
         
     }
