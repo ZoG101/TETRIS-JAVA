@@ -1,5 +1,7 @@
 package tetris;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Davi Campolina
@@ -26,6 +28,13 @@ public class TETRIS {
     public static void mostraInicio () {
         
         TETRIS.fi.setVisible(Boolean.TRUE);
+        
+    }
+    
+    public static void fimDeJogo (Integer pontos) {
+        
+        String nomeJogador = JOptionPane.showInputDialog("Fim de Jogo!\nDigite o seu nome:");
+        TETRIS.pl.adicionaNome(nomeJogador, pontos.intValue());
         
     }
 

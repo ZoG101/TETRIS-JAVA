@@ -1,20 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package tetris;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Davi Campolina
  */
 public class PlacarDeLideres extends javax.swing.JFrame {
+    
+    private DefaultTableModel tm;
 
     /**
      * Creates new form PlacarDeLideres
      */
     public PlacarDeLideres() {
+        
         initComponents();
+        this.iniciaTabela();
+        
+    }
+    
+    private void iniciaTabela () {
+        
+        tm = (DefaultTableModel) this.placarLideres.getModel();
+        
     }
 
     /**
@@ -26,19 +35,46 @@ public class PlacarDeLideres extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        botaoMenu = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        placarLideres = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setFont(new java.awt.Font("Monocraft", 0, 12)); // NOI18N
-        jButton1.setText("Menu Principal");
-        jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoMenu.setFont(new java.awt.Font("Monocraft", 0, 12)); // NOI18N
+        botaoMenu.setText("Menu Principal");
+        botaoMenu.setFocusable(false);
+        botaoMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoMenuActionPerformed(evt);
             }
         });
+
+        placarLideres.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NOME", "PONTUAÇÃO"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(placarLideres);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,28 +82,41 @@ public class PlacarDeLideres extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botaoMenu)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botaoMenu)
+                .addGap(5, 5, 5))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuActionPerformed
         
         this.setVisible(Boolean.FALSE);
         TETRIS.mostraInicio();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoMenuActionPerformed
 
+    public void adicionaNome (String nomeJogador, Integer pontos) {
+        
+        this.tm.addRow(new Object[] {nomeJogador, pontos});
+        this.setVisible(Boolean.TRUE);
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -104,6 +153,8 @@ public class PlacarDeLideres extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botaoMenu;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable placarLideres;
     // End of variables declaration//GEN-END:variables
 }

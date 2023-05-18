@@ -51,7 +51,8 @@ public class GameThread extends Thread {
             
             if (ga.foraDoLimite()) {
                 
-                System.out.println("Fim de Jogo.");
+                this.fj.setVisible(Boolean.FALSE);
+                TETRIS.fimDeJogo(this.pontuacao);
                 break;
                 
             }
