@@ -4,7 +4,7 @@
 
 <h2 align="center" text-weight="bold">REQUISITOS FUNCIONAIS</h2>
 
-- [] O jogo deve ter um menu inicial simples com um botão para iniciar, outro para ver o plecar de líderes e um para sair;
+- [x] O jogo deve ter um menu inicial simples com um botão para iniciar, outro para ver o plecar de líderes e um para sair;
 
 - [x] O jogo deve ir progredindo a diculdade com o tempo;
 
