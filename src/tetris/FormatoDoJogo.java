@@ -18,6 +18,7 @@ import javax.swing.KeyStroke;
 public class FormatoDoJogo extends JFrame {
     
     private AreaDeJogo ga;
+    private GameThread gt;
 
     /**
      * Creates new form FormatoDoJogo
@@ -28,7 +29,6 @@ public class FormatoDoJogo extends JFrame {
         this.ga = new AreaDeJogo(placeholderDeArea, 10);
         this.add(ga);
         this.iniciaControles();
-        this.comecarJogo();
         
     }
     
@@ -90,7 +90,9 @@ public class FormatoDoJogo extends JFrame {
     
     public void comecarJogo () {
         
-        new GameThread(this.ga, this).start();
+        this.ga.iniciaFundo();
+        this.gt = new GameThread(this.ga, this);
+        this.gt.start();
         
     }
     
@@ -118,6 +120,7 @@ public class FormatoDoJogo extends JFrame {
         placeholderDeArea = new javax.swing.JPanel();
         displayPontuacao = new javax.swing.JLabel();
         displayNivel = new javax.swing.JLabel();
+        botaoMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,35 +146,56 @@ public class FormatoDoJogo extends JFrame {
         displayNivel.setFont(new java.awt.Font("Monocraft", 0, 14)); // NOI18N
         displayNivel.setText("Nível: 1");
 
+        botaoMenu.setFont(new java.awt.Font("Monocraft", 0, 12)); // NOI18N
+        botaoMenu.setText("Menu Princial");
+        botaoMenu.setFocusable(false);
+        botaoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(displayPontuacao, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(displayNivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(displayPontuacao, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                        .addComponent(displayNivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoMenu))
+                .addGap(22, 22, 22)
                 .addComponent(placeholderDeArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(placeholderDeArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(displayNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(displayPontuacao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoMenu))
+                    .addComponent(placeholderDeArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(displayNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(displayPontuacao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botaoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuActionPerformed
+        
+        gt.interrupt();
+        this.setVisible(Boolean.FALSE);
+        TETRIS.mostraInicio();
+        
+    }//GEN-LAST:event_botaoMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +240,7 @@ public class FormatoDoJogo extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoMenu;
     private javax.swing.JLabel displayNivel;
     private javax.swing.JLabel displayPontuacao;
     private javax.swing.JPanel placeholderDeArea;

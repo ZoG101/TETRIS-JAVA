@@ -26,7 +26,7 @@ public class AreaDeJogo extends JPanel {
     public AreaDeJogo(JPanel placeholder, Integer colunas) {
         
         initComponents();
-        placeholder.setVisible(Boolean.FALSE);
+        //placeholder.setVisible(Boolean.FALSE);
         this.setBounds(placeholder.getBounds());
         this.setBackground(placeholder.getBackground());
         this.setBorder(placeholder.getBorder());
@@ -35,9 +35,13 @@ public class AreaDeJogo extends JPanel {
         this.tamanhoCelula = Integer.valueOf(this.getBounds().width) / colunas.intValue();
         this.linhas = this.getBounds().height / tamanhoCelula.intValue();
         
-        this.fundo = new Color[this.linhas][this.coluna];
-        
         this.blocos = new BlocoTetris[]{new FormatoI(), new FormatoJ(), new FormatoL(), new FormatoO(), new FormatoS(), new FormatoT(), new FormatoZ()};
+        
+    }
+    
+    public void iniciaFundo () {
+        
+        this.fundo = new Color[this.linhas][this.coluna];
         
     }
     

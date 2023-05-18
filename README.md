@@ -12,7 +12,7 @@
 
 - [x] O jogador deve ser capaz de mover os blocos e gira-los;
 
-- [] O jogo deve ter diferentes formatos e cores de blocos.
+- [x] O jogo deve ter diferentes formatos e cores de blocos.
 
 <h2 align="center" text-weight="bold">REQUISITOS NÃO FUNCIONAIS</h2>
 

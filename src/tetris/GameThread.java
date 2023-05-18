@@ -22,6 +22,9 @@ public class GameThread extends Thread {
         this.nivelPorPonto = Integer.valueOf(50);
         this.pausa = Integer.valueOf(1000);
         
+        this.fj.atualizaPontuacao(this.pontuacao.intValue());
+        this.fj.atualizaNivel(this.nivel.intValue());
+        
     }
     
     @Override
@@ -40,6 +43,7 @@ public class GameThread extends Thread {
                 } catch (Exception e) {
 
                     System.err.println(e.getMessage());
+                    return;
 
                 }
                 
