@@ -1,6 +1,19 @@
 package tetris;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -9,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 public class PlacarDeLideres extends javax.swing.JFrame {
     
     private DefaultTableModel tm;
+    private final String PLACAR_LIDERES = "placarLideres";
+    private TableRowSorter<TableModel> ordenador;
 
     /**
      * Creates new form PlacarDeLideres
@@ -16,13 +31,82 @@ public class PlacarDeLideres extends javax.swing.JFrame {
     public PlacarDeLideres() {
         
         initComponents();
-        this.iniciaTabela();
+        
+        try {
+            
+            this.iniciaTabela();
+            
+        } catch (Exception e) {
+            
+            System.err.println(e.getMessage());
+            
+        }
+        
+        this.iniciaOrdenadorDeTabela();
         
     }
     
-    private void iniciaTabela () {
+    private void iniciaTabela () throws FileNotFoundException {
+        
+        Vector<String> ci = new Vector<String>();
+        ci.add("NOME");
+        ci.add("PONTUAÇÃO");
         
         tm = (DefaultTableModel) this.placarLideres.getModel();
+        
+        try {
+            
+            ObjectInputStream os;
+            
+            try (FileInputStream fis = new FileInputStream(new File ("C:\\Users\\Davi Campolina\\Documents\\Workspace\\MY_PROJECTS\\TETRIS\\data\\" + PLACAR_LIDERES + ".bin"))) {
+                
+                os = new ObjectInputStream(fis);
+                tm.setDataVector((Vector<Vector>)os.readObject(), ci);
+                
+            }
+            
+            os.close();
+            
+        } catch (Exception e) {
+            
+            System.err.println(e.getMessage());
+            
+        }
+        
+    }
+    
+    private void iniciaOrdenadorDeTabela () {
+        
+        this.ordenador = new TableRowSorter<>(this.tm);
+        this.placarLideres.setRowSorter(ordenador);
+        
+        List<SortKey> chave = new ArrayList<>();
+        chave.add(new SortKey(1, SortOrder.DESCENDING));
+        
+        ordenador.setSortKeys(chave);
+        
+    }
+    
+    private void salvar () {
+        
+        try {
+            
+            ObjectOutputStream os;
+            
+            try (FileOutputStream fos = new FileOutputStream(new File ("C:\\Users\\Davi Campolina\\Documents\\Workspace\\MY_PROJECTS\\TETRIS\\data\\" + PLACAR_LIDERES + ".bin"))) {
+                
+                os = new ObjectOutputStream(fos);
+                os.writeObject(tm.getDataVector());
+                
+            }
+            
+            os.close();
+            
+        } catch (Exception e) {
+            
+            System.err.println(e.getMessage());
+            
+        }
         
     }
 
@@ -74,6 +158,7 @@ public class PlacarDeLideres extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        placarLideres.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(placarLideres);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,6 +198,8 @@ public class PlacarDeLideres extends javax.swing.JFrame {
     public void adicionaNome (String nomeJogador, Integer pontos) {
         
         this.tm.addRow(new Object[] {nomeJogador, pontos});
+        this.ordenador.sort();
+        this.salvar();
         this.setVisible(Boolean.TRUE);
         
     }

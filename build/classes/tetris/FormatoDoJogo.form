@@ -26,14 +26,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="displayPontuacao" pref="138" max="32767" attributes="0"/>
-                      <Component id="displayNivel" max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="botaoMenu" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="displayNivel" max="32767" attributes="0"/>
+                  <Component id="displayPontuacao" alignment="0" pref="154" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="placeholderDeArea" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="134" max="32767" attributes="0"/>
           </Group>
