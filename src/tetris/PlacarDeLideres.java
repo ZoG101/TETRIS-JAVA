@@ -58,7 +58,7 @@ public class PlacarDeLideres extends javax.swing.JFrame {
             
             ObjectInputStream os;
             
-            try (FileInputStream fis = new FileInputStream(new File ("C:\\Users\\Davi Campolina\\Documents\\Workspace\\MY_PROJECTS\\TETRIS\\data\\" + PLACAR_LIDERES + ".bin"))) {
+            try (FileInputStream fis = new FileInputStream(new File ("data" + File.separator + PLACAR_LIDERES + ".bin"))) {
                 
                 os = new ObjectInputStream(fis);
                 tm.setDataVector((Vector<Vector>)os.readObject(), ci);

@@ -16,11 +16,11 @@
 
 <h2 align="center" text-weight="bold">REQUISITOS NÃO FUNCIONAIS</h2>
 
-- [] O programa deve ser capaz de salvar e persistir os dados do placar de líderes;
+- [x] O programa deve ser capaz de salvar e persistir os dados do placar de líderes;
 
-- [] O deve ser perguntado as iniciais ou o nome do player quando este perder.
+- [x] O deve ser perguntado as iniciais ou o nome do player quando este perder.
 
-- [] O jogo deve ser dinâmico e leve;
+- [x] O jogo deve ser dinâmico e leve;
 
 - [x] A movimentação dos blocos não pode ser lagada;
 

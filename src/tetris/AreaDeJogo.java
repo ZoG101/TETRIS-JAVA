@@ -242,6 +242,8 @@ public class AreaDeJogo extends JPanel {
             
         }
         
+        if (linhasLimpas > 0) TETRIS.tocaLimpaLinha();
+        
         return linhasLimpas;
         
     }

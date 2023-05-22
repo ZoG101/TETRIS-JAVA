@@ -11,6 +11,7 @@ public class TETRIS {
     private static FormatoDoJogo fj;
     private static FormaInicio fi;
     private static PlacarDeLideres pl;
+    private static TetrisAudio audio = new TetrisAudio();
     
     public static void comecar () {
         
@@ -33,8 +34,29 @@ public class TETRIS {
     
     public static void fimDeJogo (Integer pontos) {
         
+        TETRIS.tocaGameOver();
+        
         String nomeJogador = JOptionPane.showInputDialog("Fim de Jogo!\nDigite o seu nome:");
+        
+        if (nomeJogador.isBlank()) { 
+            
+            fi.setVisible(Boolean.TRUE);
+            return; 
+        
+        }
         TETRIS.pl.adicionaNome(nomeJogador, pontos.intValue());
+        
+    }
+    
+    public static void tocaLimpaLinha () {
+        
+        audio.tocaLimpaLinha();
+        
+    }
+    
+    public static void tocaGameOver () {
+
+        audio.tocaGameOver();
         
     }
 
