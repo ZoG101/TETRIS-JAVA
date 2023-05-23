@@ -93,7 +93,7 @@ public class PlacarDeLideres extends javax.swing.JFrame {
             
             ObjectOutputStream os;
             
-            try (FileOutputStream fos = new FileOutputStream(new File ("C:\\Users\\Davi Campolina\\Documents\\Workspace\\MY_PROJECTS\\TETRIS\\data\\" + PLACAR_LIDERES + ".bin"))) {
+            try (FileOutputStream fos = new FileOutputStream(new File ("data" + File.separator + PLACAR_LIDERES + ".bin"))) {
                 
                 os = new ObjectOutputStream(fos);
                 os.writeObject(tm.getDataVector());
